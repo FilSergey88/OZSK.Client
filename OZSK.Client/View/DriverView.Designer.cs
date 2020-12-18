@@ -44,7 +44,7 @@
             // 
             this.Save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Save.Location = new System.Drawing.Point(257, 199);
-            this.Save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Save.Margin = new System.Windows.Forms.Padding(4);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(133, 37);
             this.Save.TabIndex = 21;
@@ -86,7 +86,7 @@
             // 
             this.textBoxNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Number", true));
             this.textBoxNumber.Location = new System.Drawing.Point(75, 101);
-            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(509, 22);
             this.textBoxNumber.TabIndex = 12;
@@ -95,7 +95,7 @@
             // 
             this.textBoxFIO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "FIO", true));
             this.textBoxFIO.Location = new System.Drawing.Point(75, 52);
-            this.textBoxFIO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxFIO.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxFIO.Name = "textBoxFIO";
             this.textBoxFIO.Size = new System.Drawing.Size(509, 22);
             this.textBoxFIO.TabIndex = 11;
@@ -105,10 +105,11 @@
             this.comboBoxAutos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAutos.FormattingEnabled = true;
             this.comboBoxAutos.Location = new System.Drawing.Point(75, 151);
-            this.comboBoxAutos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxAutos.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxAutos.Name = "comboBoxAutos";
             this.comboBoxAutos.Size = new System.Drawing.Size(509, 24);
             this.comboBoxAutos.TabIndex = 24;
+            this.comboBoxAutos.ValueMember = "Id";
             // 
             // bindingSourceViewModel
             // 
@@ -126,7 +127,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxNumber);
             this.Controls.Add(this.textBoxFIO);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DriverView";
             this.Text = "Добавить водителя";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).EndInit();

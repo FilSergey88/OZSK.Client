@@ -22,15 +22,18 @@ namespace OZSK.Client
             InitializeComponent();
             _viewModel.Initialize();
             bindingSourceViewModel.DataSource = _viewModel;
-            var bSource = new BindingSource { DataSource = _viewModel.Autos };
-            comboBoxAutos.DataSource = bSource;
+            comboBoxAutos.DataBindings.Add("DataSource", _viewModel, "Autos", true,
+                DataSourceUpdateMode.OnPropertyChanged);
             comboBoxAutos.DisplayMember = "FullName";
             comboBoxAutos.ValueMember = "Id";
+            comboBoxAutos.DataBindings.Add("SelectedItem", _viewModel, "Auto", true,
+                DataSourceUpdateMode.OnPropertyChanged);
+
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            _viewModel.Save((Auto)comboBoxAutos.SelectedItem);
+            _viewModel.Save();
 
         }
     }

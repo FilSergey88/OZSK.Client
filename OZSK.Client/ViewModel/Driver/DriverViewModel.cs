@@ -37,33 +37,36 @@ namespace OZSK.Client.ViewModel.Driver
             set => SetProperty(ref _name, value);
         }
 
-        private BindingList<Model.Abstr.Auto> _autos;
+        private List<Model.Abstr.Auto> _autos;
 
-        public BindingList<Model.Abstr.Auto> Autos
+        public List<Model.Abstr.Auto> Autos
         {
             get => _autos;
             set => SetProperty(ref _autos, value);
 
         }
+
+        private Model.Abstr.Auto _auto;
+        public Model.Abstr.Auto Auto
+        {
+            get => _auto;
+            set => SetProperty(ref _auto, value);
+        }
         #endregion
 
         public override void Initialize()
         {
-            Task.Run(async () => await _loadAutosCommand.Execute(null)).ContinueWith(q =>
-            {
-                Autos = new BindingList<Model.Abstr.Auto>(_loadAutosCommand.Autos);
-            });
-            Thread.Sleep(2000);
+            Task.Run(async () => await _loadAutosCommand.Execute(this,null));
         }
 
-        public async void Save(Model.Abstr.Auto selectedItem)
+        public async void Save()
         {
             var newAuto = new Model.Driver()
             {
                 Number = Number,
                 Name = FIO,
                 EntityState = EntityState.Added,
-                AutoId = selectedItem?.Id ?? 0
+                AutoId = Auto?.Id ?? 0
             };
             await _saveDriverCommand.Execute(newAuto);
         }

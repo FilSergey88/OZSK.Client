@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -20,14 +21,13 @@ namespace OZSK.Client.ViewModel.Auto.Command
             var path = "Carrier";
             _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Model.Carrier>>(path);
         }
-        public async Task Execute(object parameter)
+        public async Task Execute(AutoViewModel viewModel,object parameter)
         {
             if (!CanExecute(parameter))
                 return;
             var result =  await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            Carriers = result.ToList();
+            viewModel.CarrierList = result.ToList();
         }
-        public List<Model.Carrier> Carriers { get; set; }
         public bool CanExecute(object parameter)
         {
             return true;

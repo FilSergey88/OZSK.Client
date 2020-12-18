@@ -18,14 +18,13 @@ namespace OZSK.Client.ViewModel.Driver.Command
             var path = "Auto";
             _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Model.Abstr.Auto>>(path);
         }
-        public async Task Execute(object parameter)
+        public async Task Execute(DriverViewModel viewModel,object parameter)
         {
             if (!CanExecute(parameter))
                 return;
             var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            Autos = result.ToList();
+            viewModel.Autos = result.ToList();
         }
-        public List<Model.Abstr.Auto> Autos { get; set; }
         public bool CanExecute(object parameter)
         {
             return true;

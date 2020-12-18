@@ -17,24 +17,26 @@ namespace OZSK.Client
     public partial class AutoView : Form
     {
         private AutoViewModel _viewModel;
+
         public AutoView()
         {
             _viewModel = new AutoViewModel();
 
-            
+
             InitializeComponent();
             _viewModel.Initialize();
             bindingSourceViewModel.DataSource = _viewModel;
-            var bSource = new BindingSource {DataSource = _viewModel.CarrierList};
-            comboBoxCarriers.DataSource = bSource;
+            comboBoxCarriers.DataBindings.Add("DataSource", _viewModel, "CarrierList", true,
+                DataSourceUpdateMode.OnPropertyChanged);
             comboBoxCarriers.DisplayMember = "Name";
             comboBoxCarriers.ValueMember = "Id";
+            comboBoxCarriers.DataBindings.Add("SelectedItem", _viewModel, "Carrier", true,
+                DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-
-            _viewModel.Save((Carrier)comboBoxCarriers.SelectedItem);
+            _viewModel.Save();
         }
     }
 }

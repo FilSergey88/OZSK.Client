@@ -13,9 +13,5 @@ namespace OZSK.Client.Model.Abstr
         public string ServiceName { get; set; }
     }
 
-    public static class Constant
-    {
-        public const string BaseURl = "https://localhost";
-        public const int Port = 5001;
-    }
+    
 }

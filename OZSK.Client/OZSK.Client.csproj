@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Abstr\Constant.cs" />
     <Compile Include="Model\Abstr\HttpClientBuilder.cs" />
     <Compile Include="Model\Abstr\IHasEntityState.cs" />
     <Compile Include="Model\Abstr\ServiceConfig.cs" />

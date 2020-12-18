@@ -15,6 +15,8 @@ namespace OZSK.Client.Model.Abstr
         public IEnumerable<Driver> Drivers { get; set; }
         public EntityState EntityState { get; set; }
         public byte[] Ts { get; set; }
+
+        public string FullName => $"{Brand} {Number}";
     }
 }
 

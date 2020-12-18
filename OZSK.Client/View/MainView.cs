@@ -22,8 +22,7 @@ namespace OZSK.Client
 
             InitializeComponent();
             bindingSourceViewModel.DataSource = _viewModel;
-            var command = new LoadCarriersCommand();
-            command.Execute(null);
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -34,8 +33,13 @@ namespace OZSK.Client
 
         private void MainView_Load(object sender, EventArgs e)
         {
-            _viewModel.Initialize();
-            Thread.Sleep(3000);
+            //_viewModel.Initialize();
+            //Thread.Sleep(3000);
+        }
+
+        private void buttonAddDriver_Click(object sender, EventArgs e)
+        {
+            _viewModel.AddDriver();
         }
     }
 }

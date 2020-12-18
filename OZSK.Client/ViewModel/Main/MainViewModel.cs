@@ -5,18 +5,16 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 using OZSK.Client.Annotations;
+using OZSK.Client.ViewModel;
 using OZSK.Client.ViewModel.Auto.Command;
 
 namespace OZSK.Client
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
-        private LoadCarriersCommand _loadCarriersCommand;
 
-        public void Initialize()
+        public override void Initialize()
         {
-            _loadCarriersCommand = new LoadCarriersCommand();
-            _loadCarriersCommand.Execute(null);
         }
         public void AddAuto()
         {
@@ -28,12 +26,14 @@ namespace OZSK.Client
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void AddDriver()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            using var form = new DriverView();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+            }
         }
     }
 }

@@ -103,6 +103,10 @@
     <Compile Include="ViewModel\Auto\AutoViewModel.cs" />
     <Compile Include="ViewModel\Auto\Command\LoadCarriersCommand.cs" />
     <Compile Include="ViewModel\Auto\Command\SaveAutoCommand.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Driver\Command\LoadAutosCommand.cs" />
+    <Compile Include="ViewModel\Driver\Command\SaveDriverCommand.cs" />
+    <Compile Include="ViewModel\Driver\DriverViewModel.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="View\AutoView.cs">
       <SubType>Form</SubType>
@@ -151,6 +155,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Auto.AutoViewModel.datasource" />
+    <None Include="Properties\DataSources\OZSK.Client.ViewModel.Driver.DriverViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

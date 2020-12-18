@@ -14,7 +14,7 @@ using OZSK.Client.ViewModel.Auto;
 
 namespace OZSK.Client
 {
-    public partial class AutoView : Form, INotifyPropertyChanged
+    public partial class AutoView : Form
     {
         private AutoViewModel _viewModel;
         public AutoView()
@@ -29,18 +29,6 @@ namespace OZSK.Client
             comboBoxCarriers.DataSource = bSource;
             comboBoxCarriers.DisplayMember = "Name";
             comboBoxCarriers.ValueMember = "Id";
-            comboBoxCarriers.SelectedItem = nameof(_viewModel.SelectedCarrier);
-
-        }
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

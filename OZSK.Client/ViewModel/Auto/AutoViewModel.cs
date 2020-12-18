@@ -13,83 +13,60 @@ using OZSK.Client.ViewModel.Auto.Command;
 
 namespace OZSK.Client.ViewModel.Auto
 {
-    public class AutoViewModel : INotifyPropertyChanged
+    public class AutoViewModel : BaseViewModel
     {
         private readonly LoadCarriersCommand _loadCarriersCommand;
         private readonly SaveAutoCommand _saveCarrierCommand;
-        private string _model;
-        private string _number;
-        private string _sts;
-        private string _pts;
-        private Carrier _carrier;
-
+        
         public AutoViewModel()
         {
             _loadCarriersCommand = new LoadCarriersCommand();
             _saveCarrierCommand = new SaveAutoCommand();
         }
 
+        #region Params
+        private string _model;
+        private string _number;
+        private string _sts;
+        private string _pts;
+
         public string Model
         {
             get => _model;
-            set
-            {
-                _model = value;
-                OnPropertyChanged(nameof(Model));
-            }
+            set => SetProperty(ref _model, value);
         }
 
         public string Number
         {
             get => _number;
-            set
-            {
-                _number = value;
-                OnPropertyChanged(nameof(Number));
-            }
+            set => SetProperty(ref _number, value);
+
         }
 
         public string STS
         {
             get => _sts;
-            set
-            {
-                _sts = value;
-                OnPropertyChanged(nameof(STS));
-            }
+            set => SetProperty(ref _sts, value);
+
         }
 
         public string PTS
         {
             get => _pts;
-            set
-            {
-                _pts = value;
-                OnPropertyChanged(nameof(PTS));
-            }
+            set => SetProperty(ref _pts, value);
+
         }
 
-        public Carrier SelectedCarrier
-        {
-            get => _carrier;
-            set
-            {
-                _carrier = value;
-                OnPropertyChanged(nameof(SelectedCarrier));
-            }
-        }
 
         private BindingList<Carrier> _carriers;
 
         public BindingList<Carrier> CarrierList
         {
             get => _carriers;
-            set
-            {
-                _carriers = value;
-                OnPropertyChanged(nameof(CarrierList));
-            }
+            set => SetProperty(ref _carriers, value);
+
         }
+        #endregion
 
         public async void Save(Carrier selectedCarrier)
         {
@@ -105,22 +82,13 @@ namespace OZSK.Client.ViewModel.Auto
             await _saveCarrierCommand.Execute(newAuto);
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             Task.Run(async () => await _loadCarriersCommand.Execute(null)).ContinueWith(q =>
             {
                 CarrierList = new BindingList<Carrier>(_loadCarriersCommand.Carriers);
             });
             Thread.Sleep(2000);
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

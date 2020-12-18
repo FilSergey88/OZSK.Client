@@ -271,6 +271,7 @@
             // 
             // buttonAddDriver
             // 
+            this.buttonAddDriver.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonAddDriver.Location = new System.Drawing.Point(169, 532);
             this.buttonAddDriver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAddDriver.Name = "buttonAddDriver";
@@ -278,6 +279,7 @@
             this.buttonAddDriver.TabIndex = 25;
             this.buttonAddDriver.Text = "Добавить водителя";
             this.buttonAddDriver.UseVisualStyleBackColor = true;
+            this.buttonAddDriver.Click += new System.EventHandler(this.buttonAddDriver_Click);
             // 
             // buttonAddCarrier
             // 

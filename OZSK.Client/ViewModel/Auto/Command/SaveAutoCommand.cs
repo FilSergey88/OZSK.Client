@@ -27,7 +27,7 @@ namespace OZSK.Client.ViewModel.Auto.Command
         }
         public bool CanExecute(object parameter)
         {
-            return !(parameter is Carrier);
+            return (parameter is Model.Abstr.Auto);
         }
     }
 }

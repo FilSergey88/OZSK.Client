@@ -93,8 +93,10 @@
     <Compile Include="Model\Abstr\ServiceConfig.cs" />
     <Compile Include="Model\Auto.cs" />
     <Compile Include="Model\Carrier.cs" />
+    <Compile Include="Model\Cipherlist.cs" />
     <Compile Include="Model\Consignee.cs" />
     <Compile Include="Model\Driver.cs" />
+    <Compile Include="Model\ShippingName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +112,8 @@
     <Compile Include="ViewModel\Driver\Command\LoadAutosCommand.cs" />
     <Compile Include="ViewModel\Driver\Command\SaveDriverCommand.cs" />
     <Compile Include="ViewModel\Driver\DriverViewModel.cs" />
+    <Compile Include="ViewModel\Main\Command\LoadCipherListCommand.cs" />
+    <Compile Include="ViewModel\Main\Command\LoadShippingNameCommand.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="View\AutoView.cs">
       <SubType>Form</SubType>
@@ -160,6 +164,7 @@
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Auto.AutoViewModel.datasource" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Carrier.CarrierViewModel.datasource" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Driver.DriverViewModel.datasource" />
+    <None Include="Properties\DataSources\OZSK.Client.ViewModel.Main.MainViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -173,8 +178,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\Main\Command\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

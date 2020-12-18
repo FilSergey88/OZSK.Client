@@ -32,10 +32,9 @@
             this.textBoxTN = new System.Windows.Forms.TextBox();
             this.textBoxOV = new System.Windows.Forms.TextBox();
             this.textBoxConsigneeName = new System.Windows.Forms.TextBox();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.textBoxMassa = new System.Windows.Forms.TextBox();
-            this.textBoxDriver = new System.Windows.Forms.TextBox();
-            this.textBoxAuto = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxCarriers = new System.Windows.Forms.ComboBox();
             this.ComboBoxCipherList = new System.Windows.Forms.ComboBox();
+            this.cipherlistsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxNameShipping = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -55,14 +55,18 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.buttonAddAuto = new System.Windows.Forms.Button();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBoxDrivers = new System.Windows.Forms.ComboBox();
+            this.comboBoxAutos = new System.Windows.Forms.ComboBox();
+            this.shippingNamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cipherlistsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shippingNamesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxTN
             // 
             this.textBoxTN.Location = new System.Drawing.Point(165, 42);
-            this.textBoxTN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxTN.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxTN.Name = "textBoxTN";
             this.textBoxTN.Size = new System.Drawing.Size(105, 22);
             this.textBoxTN.TabIndex = 0;
@@ -71,7 +75,7 @@
             // textBoxOV
             // 
             this.textBoxOV.Location = new System.Drawing.Point(296, 42);
-            this.textBoxOV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxOV.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxOV.Name = "textBoxOV";
             this.textBoxOV.Size = new System.Drawing.Size(105, 22);
             this.textBoxOV.TabIndex = 1;
@@ -79,16 +83,21 @@
             // 
             // textBoxConsigneeName
             // 
+            this.textBoxConsigneeName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "ConsigneeName", true));
             this.textBoxConsigneeName.Location = new System.Drawing.Point(40, 145);
-            this.textBoxConsigneeName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxConsigneeName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxConsigneeName.Name = "textBoxConsigneeName";
             this.textBoxConsigneeName.Size = new System.Drawing.Size(361, 22);
             this.textBoxConsigneeName.TabIndex = 2;
             // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Main.MainViewModel);
+            // 
             // textBoxCount
             // 
             this.textBoxCount.Location = new System.Drawing.Point(41, 257);
-            this.textBoxCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxCount.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(147, 22);
             this.textBoxCount.TabIndex = 3;
@@ -96,26 +105,10 @@
             // textBoxMassa
             // 
             this.textBoxMassa.Location = new System.Drawing.Point(255, 257);
-            this.textBoxMassa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxMassa.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxMassa.Name = "textBoxMassa";
             this.textBoxMassa.Size = new System.Drawing.Size(147, 22);
             this.textBoxMassa.TabIndex = 4;
-            // 
-            // textBoxDriver
-            // 
-            this.textBoxDriver.Location = new System.Drawing.Point(39, 358);
-            this.textBoxDriver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBoxDriver.Name = "textBoxDriver";
-            this.textBoxDriver.Size = new System.Drawing.Size(361, 22);
-            this.textBoxDriver.TabIndex = 5;
-            // 
-            // textBoxAuto
-            // 
-            this.textBoxAuto.Location = new System.Drawing.Point(39, 406);
-            this.textBoxAuto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBoxAuto.Name = "textBoxAuto";
-            this.textBoxAuto.Size = new System.Drawing.Size(361, 22);
-            this.textBoxAuto.TabIndex = 6;
             // 
             // label1
             // 
@@ -189,47 +182,50 @@
             // 
             // comboBoxCarriers
             // 
+            this.comboBoxCarriers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCarriers.FormattingEnabled = true;
             this.comboBoxCarriers.Items.AddRange(new object[] {
             "Негабаритика",
             "Петролесстрой",
             "DHL"});
             this.comboBoxCarriers.Location = new System.Drawing.Point(40, 306);
-            this.comboBoxCarriers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxCarriers.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxCarriers.Name = "comboBoxCarriers";
             this.comboBoxCarriers.Size = new System.Drawing.Size(361, 24);
             this.comboBoxCarriers.TabIndex = 18;
             // 
             // ComboBoxCipherList
             // 
+            this.ComboBoxCipherList.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.bindingSourceViewModel, "Cipherlist", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.ComboBoxCipherList.DataSource = this.cipherlistsBindingSource;
+            this.ComboBoxCipherList.DisplayMember = "Name";
+            this.ComboBoxCipherList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxCipherList.FormattingEnabled = true;
-            this.ComboBoxCipherList.Items.AddRange(new object[] {
-            "03-20/1",
-            "03-20/2",
-            "57-19/1",
-            "57-19/2",
-            "57-19/3",
-            "57-19/4",
-            "56-20"});
             this.ComboBoxCipherList.Location = new System.Drawing.Point(40, 42);
-            this.ComboBoxCipherList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ComboBoxCipherList.Margin = new System.Windows.Forms.Padding(4);
             this.ComboBoxCipherList.Name = "ComboBoxCipherList";
             this.ComboBoxCipherList.Size = new System.Drawing.Size(105, 24);
             this.ComboBoxCipherList.TabIndex = 19;
+            this.ComboBoxCipherList.ValueMember = "Id";
+            this.ComboBoxCipherList.SelectedValueChanged += new System.EventHandler(this.ComboBoxCipherList_SelectedValueChanged);
+            // 
+            // cipherlistsBindingSource
+            // 
+            this.cipherlistsBindingSource.DataMember = "Cipherlists";
+            this.cipherlistsBindingSource.DataSource = this.bindingSourceViewModel;
             // 
             // comboBoxNameShipping
             // 
+            this.comboBoxNameShipping.DataSource = this.shippingNamesBindingSource;
+            this.comboBoxNameShipping.DisplayMember = "Name";
+            this.comboBoxNameShipping.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxNameShipping.FormattingEnabled = true;
-            this.comboBoxNameShipping.Items.AddRange(new object[] {
-            "Контейнер",
-            "Блок-модуль",
-            "Монтажный комплект",
-            "Металлоконструкции"});
             this.comboBoxNameShipping.Location = new System.Drawing.Point(41, 208);
-            this.comboBoxNameShipping.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxNameShipping.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxNameShipping.Name = "comboBoxNameShipping";
             this.comboBoxNameShipping.Size = new System.Drawing.Size(361, 24);
             this.comboBoxNameShipping.TabIndex = 20;
+            this.comboBoxNameShipping.ValueMember = "Id";
             // 
             // label8
             // 
@@ -244,7 +240,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(36, 338);
+            this.label9.Location = new System.Drawing.Point(38, 383);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(108, 17);
@@ -254,7 +250,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(35, 386);
+            this.label10.Location = new System.Drawing.Point(36, 334);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(167, 17);
@@ -264,7 +260,7 @@
             // dateTimePickerDate
             // 
             this.dateTimePickerDate.Location = new System.Drawing.Point(39, 97);
-            this.dateTimePickerDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerDate.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerDate.Name = "dateTimePickerDate";
             this.dateTimePickerDate.Size = new System.Drawing.Size(260, 22);
             this.dateTimePickerDate.TabIndex = 24;
@@ -273,7 +269,7 @@
             // 
             this.buttonAddDriver.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonAddDriver.Location = new System.Drawing.Point(169, 532);
-            this.buttonAddDriver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAddDriver.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAddDriver.Name = "buttonAddDriver";
             this.buttonAddDriver.Size = new System.Drawing.Size(120, 62);
             this.buttonAddDriver.TabIndex = 25;
@@ -284,7 +280,7 @@
             // buttonAddCarrier
             // 
             this.buttonAddCarrier.Location = new System.Drawing.Point(296, 532);
-            this.buttonAddCarrier.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAddCarrier.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAddCarrier.Name = "buttonAddCarrier";
             this.buttonAddCarrier.Size = new System.Drawing.Size(120, 62);
             this.buttonAddCarrier.TabIndex = 26;
@@ -295,7 +291,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(41, 450);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(173, 62);
             this.button3.TabIndex = 27;
@@ -305,7 +301,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(243, 450);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(173, 62);
             this.button4.TabIndex = 28;
@@ -315,7 +311,7 @@
             // buttonAddAuto
             // 
             this.buttonAddAuto.Location = new System.Drawing.Point(41, 532);
-            this.buttonAddAuto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAddAuto.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAddAuto.Name = "buttonAddAuto";
             this.buttonAddAuto.Size = new System.Drawing.Size(120, 62);
             this.buttonAddAuto.TabIndex = 29;
@@ -323,11 +319,46 @@
             this.buttonAddAuto.UseVisualStyleBackColor = true;
             this.buttonAddAuto.Click += new System.EventHandler(this.button5_Click);
             // 
+            // comboBoxDrivers
+            // 
+            this.comboBoxDrivers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDrivers.FormattingEnabled = true;
+            this.comboBoxDrivers.Items.AddRange(new object[] {
+            "Негабаритика",
+            "Петролесстрой",
+            "DHL"});
+            this.comboBoxDrivers.Location = new System.Drawing.Point(40, 403);
+            this.comboBoxDrivers.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxDrivers.Name = "comboBoxDrivers";
+            this.comboBoxDrivers.Size = new System.Drawing.Size(361, 24);
+            this.comboBoxDrivers.TabIndex = 30;
+            // 
+            // comboBoxAutos
+            // 
+            this.comboBoxAutos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAutos.FormattingEnabled = true;
+            this.comboBoxAutos.Items.AddRange(new object[] {
+            "Негабаритика",
+            "Петролесстрой",
+            "DHL"});
+            this.comboBoxAutos.Location = new System.Drawing.Point(39, 355);
+            this.comboBoxAutos.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxAutos.Name = "comboBoxAutos";
+            this.comboBoxAutos.Size = new System.Drawing.Size(361, 24);
+            this.comboBoxAutos.TabIndex = 31;
+            // 
+            // shippingNamesBindingSource
+            // 
+            this.shippingNamesBindingSource.DataMember = "ShippingNames";
+            this.shippingNamesBindingSource.DataSource = this.bindingSourceViewModel;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 604);
+            this.Controls.Add(this.comboBoxAutos);
+            this.Controls.Add(this.comboBoxDrivers);
             this.Controls.Add(this.buttonAddAuto);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -347,18 +378,18 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxAuto);
-            this.Controls.Add(this.textBoxDriver);
             this.Controls.Add(this.textBoxMassa);
             this.Controls.Add(this.textBoxCount);
             this.Controls.Add(this.textBoxConsigneeName);
             this.Controls.Add(this.textBoxOV);
             this.Controls.Add(this.textBoxTN);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cipherlistsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shippingNamesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,8 +402,6 @@
         private System.Windows.Forms.TextBox textBoxConsigneeName;
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.TextBox textBoxMassa;
-        private System.Windows.Forms.TextBox textBoxDriver;
-        private System.Windows.Forms.TextBox textBoxAuto;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -393,6 +422,10 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button buttonAddAuto;
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
+        private System.Windows.Forms.ComboBox comboBoxDrivers;
+        private System.Windows.Forms.ComboBox comboBoxAutos;
+        private System.Windows.Forms.BindingSource cipherlistsBindingSource;
+        private System.Windows.Forms.BindingSource shippingNamesBindingSource;
     }
 }
 

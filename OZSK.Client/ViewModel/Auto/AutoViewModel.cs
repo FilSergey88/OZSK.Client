@@ -58,9 +58,9 @@ namespace OZSK.Client.ViewModel.Auto
         }
 
 
-        private BindingList<Carrier> _carriers;
+        private BindingList<Model.Carrier> _carriers;
 
-        public BindingList<Carrier> CarrierList
+        public BindingList<Model.Carrier> CarrierList
         {
             get => _carriers;
             set => SetProperty(ref _carriers, value);
@@ -68,7 +68,7 @@ namespace OZSK.Client.ViewModel.Auto
         }
         #endregion
 
-        public async void Save(Carrier selectedCarrier)
+        public async void Save(Model.Carrier selectedCarrier)
         {
             var newAuto = new Model.Abstr.Auto
             {
@@ -86,7 +86,7 @@ namespace OZSK.Client.ViewModel.Auto
         {
             Task.Run(async () => await _loadCarriersCommand.Execute(null)).ContinueWith(q =>
             {
-                CarrierList = new BindingList<Carrier>(_loadCarriersCommand.Carriers);
+                CarrierList = new BindingList<Model.Carrier>(_loadCarriersCommand.Carriers);
             });
             Thread.Sleep(2000);
         }

@@ -105,6 +105,8 @@
     <Compile Include="ViewModel\Auto\Command\LoadCarriersCommand.cs" />
     <Compile Include="ViewModel\Auto\Command\SaveAutoCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Carrier\CarrierViewModel.cs" />
+    <Compile Include="ViewModel\Carrier\Command\SaveCarrierCommand.cs" />
     <Compile Include="ViewModel\Driver\Command\LoadAutosCommand.cs" />
     <Compile Include="ViewModel\Driver\Command\SaveDriverCommand.cs" />
     <Compile Include="ViewModel\Driver\DriverViewModel.cs" />
@@ -156,6 +158,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Auto.AutoViewModel.datasource" />
+    <None Include="Properties\DataSources\OZSK.Client.ViewModel.Carrier.CarrierViewModel.datasource" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Driver.DriverViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

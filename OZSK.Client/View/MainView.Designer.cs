@@ -290,6 +290,7 @@
             this.buttonAddCarrier.TabIndex = 26;
             this.buttonAddCarrier.Text = "Добавить перевозчика";
             this.buttonAddCarrier.UseVisualStyleBackColor = true;
+            this.buttonAddCarrier.Click += new System.EventHandler(this.buttonAddCarrier_Click);
             // 
             // button3
             // 

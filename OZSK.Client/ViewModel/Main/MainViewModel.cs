@@ -35,5 +35,15 @@ namespace OZSK.Client
 
             }
         }
+
+        public void AddCarrier()
+        {
+            using var form = new CarrierView();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }

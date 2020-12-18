@@ -41,5 +41,10 @@ namespace OZSK.Client
         {
             _viewModel.AddDriver();
         }
+
+        private void buttonAddCarrier_Click(object sender, EventArgs e)
+        {
+            _viewModel.AddCarrier();
+        }
     }
 }

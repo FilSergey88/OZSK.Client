@@ -13,12 +13,12 @@ namespace OZSK.Client.ViewModel.Auto.Command
 {
     public class LoadCarriersCommand
     {
-        private readonly BaseGetServiceAgent<BaseParams, ICollection<Carrier>> _serviceAgent;
+        private readonly BaseGetServiceAgent<BaseParams, ICollection<Model.Carrier>> _serviceAgent;
 
         public LoadCarriersCommand()
         {
             var path = "Carrier";
-            _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Carrier>>(path);
+            _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Model.Carrier>>(path);
         }
         public async Task Execute(object parameter)
         {
@@ -27,7 +27,7 @@ namespace OZSK.Client.ViewModel.Auto.Command
             var result =  await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
             Carriers = result.ToList();
         }
-        public List<Carrier> Carriers { get; set; }
+        public List<Model.Carrier> Carriers { get; set; }
         public bool CanExecute(object parameter)
         {
             return true;

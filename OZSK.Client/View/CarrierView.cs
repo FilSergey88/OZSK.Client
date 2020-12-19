@@ -30,9 +30,12 @@ namespace OZSK.Client
             comboBoxCarriers.ValueMember = "Id";
             comboBoxCarriers.DataBindings.Add("SelectedItem", _viewModel, "Carrier", true,
                 DataSourceUpdateMode.OnPropertyChanged);
-            while ((isAdd || !(_viewModel.CarrierList?.Any() ?? false)))
+            if (!isAdd)
             {
-                this.Refresh();
+                while (!(_viewModel.CarrierList?.Any() ?? false))
+                {
+                    this.Refresh();
+                }
             }
         }
 
@@ -48,7 +51,7 @@ namespace OZSK.Client
                 _viewModel.Carrier = carrier;
                 _viewModel.Name = carrier.Name;
                 _viewModel.Address = carrier.Address;
-
+                _viewModel.Inn = carrier.INN;
                 _viewModel.Phone= carrier.Contact;
                 _viewModel.Seo = carrier.SEO;
             }

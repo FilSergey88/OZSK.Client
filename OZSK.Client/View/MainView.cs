@@ -27,7 +27,7 @@ namespace OZSK.Client
             InitializeComponent();
 
             _viewModel.Initialize();
-
+            dateTimePickerDate.Value = DateTime.Now.Date;
             bindingSourceViewModel.DataSource = _viewModel;
             ComboBoxCipherList.DataBindings.Add("DataSource", _viewModel, "Cipherlists", true,
                 DataSourceUpdateMode.OnPropertyChanged);
@@ -83,7 +83,8 @@ namespace OZSK.Client
                 if (sender is ComboBox cBox && cBox.SelectedItem is Cipherlist cipher)
                 {
                     isChanged = false;
-                    _viewModel.OnPropertyChangedCipher(cipher);
+                    _viewModel.Consignee = cipher.Consignee;
+                    _viewModel.Cipher = cipher;
                     cBox.SelectedItem = cipher;
                     isChanged = true;
                 }
@@ -106,6 +107,25 @@ namespace OZSK.Client
                 _viewModel.Auto = auto;
                 _viewModel.LoadDriver();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button4.Enabled = !_viewModel.LoadInTN();
+        }
+
+        private void comboBoxDrivers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxDrivers.SelectedItem is Driver driver)
+            {
+                _viewModel.Driver= driver;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button3.Enabled = !_viewModel.LoadInOV();
+
         }
     }
 }

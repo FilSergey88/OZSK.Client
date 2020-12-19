@@ -85,6 +85,7 @@ namespace OZSK.Client.ViewModel.Carrier
                 Name = Name,
                 SEO = Seo,
                 EntityState = _isAdd ? EntityState.Added : EntityState.Edited,
+                INN = Inn
             };
             if (!_isAdd)
             {

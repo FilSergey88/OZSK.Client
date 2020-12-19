@@ -52,28 +52,28 @@
             this.button4 = new System.Windows.Forms.Button();
             this.comboBoxDrivers = new System.Windows.Forms.ComboBox();
             this.comboBoxAutos = new System.Windows.Forms.ComboBox();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxTN
             // 
+            this.textBoxTN.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Tn", true));
             this.textBoxTN.Location = new System.Drawing.Point(165, 42);
             this.textBoxTN.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxTN.Name = "textBoxTN";
             this.textBoxTN.Size = new System.Drawing.Size(105, 22);
             this.textBoxTN.TabIndex = 0;
-            this.textBoxTN.Text = "5001";
             // 
             // textBoxOV
             // 
+            this.textBoxOV.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Ov", true));
             this.textBoxOV.Location = new System.Drawing.Point(296, 42);
             this.textBoxOV.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxOV.Name = "textBoxOV";
             this.textBoxOV.Size = new System.Drawing.Size(105, 22);
             this.textBoxOV.TabIndex = 1;
-            this.textBoxOV.Text = "13001";
             // 
             // textBoxConsigneeName
             // 
@@ -86,6 +86,7 @@
             // 
             // textBoxCount
             // 
+            this.textBoxCount.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Count", true));
             this.textBoxCount.Location = new System.Drawing.Point(41, 257);
             this.textBoxCount.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxCount.Name = "textBoxCount";
@@ -94,6 +95,7 @@
             // 
             // textBoxMassa
             // 
+            this.textBoxMassa.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Massa", true));
             this.textBoxMassa.Location = new System.Drawing.Point(255, 257);
             this.textBoxMassa.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxMassa.Name = "textBoxMassa";
@@ -238,6 +240,8 @@
             // 
             // dateTimePickerDate
             // 
+            this.dateTimePickerDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bindingSourceViewModel, "Date", true));
+            this.dateTimePickerDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Date", true));
             this.dateTimePickerDate.Location = new System.Drawing.Point(39, 97);
             this.dateTimePickerDate.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerDate.Name = "dateTimePickerDate";
@@ -253,6 +257,7 @@
             this.button3.TabIndex = 27;
             this.button3.Text = "Создать ОВ";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -263,6 +268,7 @@
             this.button4.TabIndex = 28;
             this.button4.Text = "Создать ТН";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // comboBoxDrivers
             // 
@@ -273,6 +279,7 @@
             this.comboBoxDrivers.Name = "comboBoxDrivers";
             this.comboBoxDrivers.Size = new System.Drawing.Size(361, 24);
             this.comboBoxDrivers.TabIndex = 30;
+            this.comboBoxDrivers.SelectedIndexChanged += new System.EventHandler(this.comboBoxDrivers_SelectedIndexChanged);
             // 
             // comboBoxAutos
             // 
@@ -285,10 +292,6 @@
             this.comboBoxAutos.TabIndex = 31;
             this.comboBoxAutos.SelectedIndexChanged += new System.EventHandler(this.comboBoxAutos_SelectedIndexChanged);
             // 
-            // bindingSourceViewModel
-            // 
-            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Main.MainViewModel);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(243, 529);
@@ -298,6 +301,10 @@
             this.button1.TabIndex = 32;
             this.button1.Text = "Выйти";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Main.MainViewModel);
             // 
             // MainView
             // 

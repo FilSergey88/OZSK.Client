@@ -45,6 +45,7 @@ namespace OZSK.Client
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxAuto = new System.Windows.Forms.ComboBox();
             this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,11 +186,24 @@ namespace OZSK.Client
             // 
             this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Auto.AutoViewModel);
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(372, 356);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 37);
+            this.button1.TabIndex = 38;
+            this.button1.Text = "Удалить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AutoView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 521);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxAuto);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -228,5 +242,6 @@ namespace OZSK.Client
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxAuto;
+        private System.Windows.Forms.Button button1;
     }
 }

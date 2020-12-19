@@ -130,5 +130,23 @@ namespace OZSK.Client.ViewModel.Auto
             get => _auto;
             set => SetProperty(ref _auto, value);
         }
+
+        public async void Delete()
+        {
+            var newAuto = new Model.Abstr.Auto
+            {
+                Number = Number,
+                Brand = Model,
+                PTS = PTS,
+                STS = STS,
+                EntityState = EntityState.Deleted,
+                CarrierId = Carrier?.Id ?? 0,
+                Ts = Auto.Ts,
+                Id =  Auto.Id
+            };
+            
+
+            await _saveCarrierCommand.Execute(newAuto);
+        }
     }
 }

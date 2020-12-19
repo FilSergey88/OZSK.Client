@@ -27,6 +27,7 @@ namespace OZSK.Client
 
             InitializeComponent();
             comboBoxAuto.Enabled = !IsAdd;
+            button1.Enabled = !IsAdd;
             _viewModel.Initialize();
             bindingSourceViewModel.DataSource = _viewModel;
             comboBoxCarriers.DataBindings.Add("DataSource", _viewModel, "CarrierList", true,
@@ -65,6 +66,11 @@ namespace OZSK.Client
                 _viewModel.Model = auto.Brand;
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _viewModel.Delete();
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -18,58 +21,77 @@ namespace OZSK.Client.ViewModel.Main
     {
         private readonly LoadCipherListCommand _loadCipherListCommand;
         private readonly LoadShippingNameCommand _loadShippingNameCommand;
+        private readonly LoadCarriersCommand _loadCarriersCommand;
+        private readonly LoadAutoByCarrierIdCommand _loadAutoByCarrierIdCommand;
+
         public MainViewModel()
         {
+            _loadAutoByCarrierIdCommand = new LoadAutoByCarrierIdCommand();
             _loadCipherListCommand = new LoadCipherListCommand();
             _loadShippingNameCommand = new LoadShippingNameCommand();
+            _loadCarriersCommand = new LoadCarriersCommand();
         }
 
         private string _consigneeName;
+
         public string ConsigneeName
         {
             get => _consigneeName;
             set => SetProperty(ref _consigneeName, value);
         }
+
         public override void Initialize()
         {
-            Task.Run(async () => await _loadCipherListCommand.Execute(null)).ContinueWith(q =>
+            Task.Run(async () =>
             {
-                Cipherlists = new List<Cipherlist>(_loadCipherListCommand.Cipherlists);
+                await _loadCipherListCommand.Execute(this, null);
+                await _loadShippingNameCommand.Execute(this, null);
+                await _loadCarriersCommand.Execute(this, null);
             });
-            Thread.Sleep(2000);
-            Task.Run(async () => await _loadShippingNameCommand.Execute(null)).ContinueWith(q =>
-            {
-                ShippingNames = new List<ShippingName>(_loadShippingNameCommand.ShippingNames);
-            });
-            Thread.Sleep(2000);
         }
 
         public void OnPropertyChangedCipher(Cipherlist cipherlist)
         {
             Consignee = cipherlist.Consignee;
-            Cipherlist = cipherlist;
+            Cipher = cipherlist;
         }
-        private Cipherlist _cipherlist;
 
-        public Cipherlist Cipherlist
+        #region Cipher
+        private Cipherlist _cipher;
+
+        public Cipherlist Cipher
         {
-            get => _cipherlist;
-            set => SetProperty(ref _cipherlist, value);
+            get => _cipher;
+            set => SetProperty(ref _cipher, value);
         }
-        private List<Cipherlist> _cipherlists;
-        private List<ShippingName> _shippingNames;
-        public List<Cipherlist> Cipherlists
+
+        private ObservableCollection<Cipherlist> _cipherlists;
+
+        public ObservableCollection<Cipherlist> Cipherlists
         {
             get => _cipherlists;
             set => SetProperty(ref _cipherlists, value);
-
         }
-        public List<ShippingName> ShippingNames
+        #endregion
+
+        #region ShippingName
+        private ObservableCollection<ShippingName> _shippingNames;
+
+        public ObservableCollection<ShippingName> ShippingNames
         {
             get => _shippingNames;
             set => SetProperty(ref _shippingNames, value);
-
         }
+
+        private ShippingName _shippingName;
+
+        public ShippingName ShippingName
+        {
+            get => _shippingName;
+            set => SetProperty(ref _shippingName, value);
+        }
+        #endregion
+
         private Consignee _consignee;
 
         public Consignee Consignee
@@ -81,32 +103,84 @@ namespace OZSK.Client.ViewModel.Main
                 ConsigneeName = value?.Name;
             }
         }
-        public void AddAuto()
+
+        #region Carrier
+        private Model.Carrier _carrier;
+
+        public Model.Carrier Carrier
         {
-            using var form = new AutoView();
-            var result = form.ShowDialog();
-            if (result == DialogResult.OK)
+            get => _carrier;
+            set => SetProperty(ref _carrier, value);
+        }
+
+        private ObservableCollection<Model.Carrier> _carriers;
+
+        public ObservableCollection<Model.Carrier> CarrierList
+        {
+            get => _carriers;
+            set => SetProperty(ref _carriers, value);
+        }
+        #endregion
+
+        #region Auto
+        private ObservableCollection<Model.Abstr.Auto> _autos;
+
+        public ObservableCollection<Model.Abstr.Auto> Autos
+        {
+            get => _autos;
+            set => SetProperty(ref _autos, value);
+        }
+
+        private Model.Abstr.Auto _auto;
+
+        public Model.Abstr.Auto Auto
+        {
+            get => _auto;
+            set => SetProperty(ref _auto, value);
+        }
+        #endregion
+
+        #region Driver
+        private ObservableCollection<Model.Driver> _drivers;
+
+        public ObservableCollection<Model.Driver> Drivers
+        {
+            get => _drivers;
+            set => SetProperty(ref _drivers, value);
+        }
+
+        private Model.Driver _driver;
+
+        public Model.Driver Driver
+        {
+            get => _driver;
+            set => SetProperty(ref _driver, value);
+        }
+        #endregion
+
+        public void LoadAuto()
+        {
+            if (Carrier != null)
             {
-                
+                Autos = new ObservableCollection<Model.Abstr.Auto>
+                (CarrierList?.FirstOrDefault(q => q.Id == Carrier.Id)
+                    ?.Autos?
+                    .ToList()!);
+                if (!Autos.Any())
+                {
+                    Drivers = new ObservableCollection<Model.Driver>();
+                }
             }
         }
 
-        public void AddDriver()
+        public void LoadDriver()
         {
-            using var form = new DriverView();
-            var result = form.ShowDialog();
-            if (result == DialogResult.OK)
+            if (Auto != null)
             {
-
-            }
-        }
-
-        public void AddCarrier()
-        {
-            using var form = new CarrierView();
-            var result = form.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+                Drivers = new ObservableCollection<Model.Driver>
+                (Autos?.FirstOrDefault(q => q.Id == Auto.Id)
+                    ?.Drivers?
+                    .ToList()!);
 
             }
         }

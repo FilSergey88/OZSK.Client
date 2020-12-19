@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Security.Principal;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 using OZSK.Client.Model;
 using OZSK.Client.Model.Abstr;
 using OZSK.Client.ServiceAgent;
+using OZSK.Client.ViewModel.Carrier;
+using OZSK.Client.ViewModel.Main;
 
 namespace OZSK.Client.ViewModel.Auto.Command
 {
@@ -26,7 +29,21 @@ namespace OZSK.Client.ViewModel.Auto.Command
             if (!CanExecute(parameter))
                 return;
             var result =  await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            viewModel.CarrierList = result.ToList();
+            viewModel.CarrierList =  new ObservableCollection<Model.Carrier>(result.ToList());result.ToList();
+        }
+        public async Task Execute(MainViewModel viewModel, object parameter)
+        {
+            if (!CanExecute(parameter))
+                return;
+            var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
+            viewModel.CarrierList = new ObservableCollection<Model.Carrier>(result.ToList()); 
+        }
+        public async Task Execute(CarrierViewModel viewModel, object parameter)
+        {
+            if (!CanExecute(parameter))
+                return;
+            var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
+            viewModel.CarrierList = new ObservableCollection<Model.Carrier>(result.ToList());
         }
         public bool CanExecute(object parameter)
         {

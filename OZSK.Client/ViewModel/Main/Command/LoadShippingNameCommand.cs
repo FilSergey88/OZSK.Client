@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using OZSK.Client.Model;
 using OZSK.Client.ServiceAgent;
 
 namespace OZSK.Client.ViewModel.Main.Command
@@ -17,14 +19,13 @@ namespace OZSK.Client.ViewModel.Main.Command
             var path = "ShippingName";
             _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Model.ShippingName>>(path);
         }
-        public async Task Execute(object parameter)
+        public async Task Execute(MainViewModel viewModel,object parameter)
         {
             if (!CanExecute(parameter))
                 return;
             var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            ShippingNames = result.ToList();
+            viewModel.ShippingNames = new ObservableCollection<ShippingName>(result.ToList());result.ToList();
         }
-        public List<Model.ShippingName> ShippingNames { get; set; }
         public bool CanExecute(object parameter)
         {
             return true;

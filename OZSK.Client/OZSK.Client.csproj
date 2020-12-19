@@ -103,6 +103,7 @@
     <Compile Include="ServiceAgent\BaseGetServiceAgent.cs" />
     <Compile Include="ServiceAgent\BaseParams.cs" />
     <Compile Include="ServiceAgent\BasePostServiceAgent.cs" />
+    <Compile Include="ServiceAgent\LoadAutoByIdServiceAgent.cs" />
     <Compile Include="ViewModel\Auto\AutoViewModel.cs" />
     <Compile Include="ViewModel\Auto\Command\LoadCarriersCommand.cs" />
     <Compile Include="ViewModel\Auto\Command\SaveAutoCommand.cs" />
@@ -110,8 +111,10 @@
     <Compile Include="ViewModel\Carrier\CarrierViewModel.cs" />
     <Compile Include="ViewModel\Carrier\Command\SaveCarrierCommand.cs" />
     <Compile Include="ViewModel\Driver\Command\LoadAutosCommand.cs" />
+    <Compile Include="ViewModel\Driver\Command\LoadDriverCommand.cs" />
     <Compile Include="ViewModel\Driver\Command\SaveDriverCommand.cs" />
     <Compile Include="ViewModel\Driver\DriverViewModel.cs" />
+    <Compile Include="ViewModel\Main\Command\LoadAutoByCarrierIdCommand.cs" />
     <Compile Include="ViewModel\Main\Command\LoadCipherListCommand.cs" />
     <Compile Include="ViewModel\Main\Command\LoadShippingNameCommand.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
@@ -139,6 +142,12 @@
     <Compile Include="View\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MenuView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MenuView.Designer.cs">
+      <DependentUpon>MenuView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -159,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MenuView.resx">
+      <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OZSK.Client.ViewModel.Auto.AutoViewModel.datasource" />

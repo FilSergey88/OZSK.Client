@@ -37,13 +37,15 @@
             this.textBoxFIO = new System.Windows.Forms.TextBox();
             this.comboBoxAutos = new System.Windows.Forms.ComboBox();
             this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxDrivers = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
             // Save
             // 
             this.Save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Save.Location = new System.Drawing.Point(257, 199);
+            this.Save.Location = new System.Drawing.Point(255, 257);
             this.Save.Margin = new System.Windows.Forms.Padding(4);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(133, 37);
@@ -55,7 +57,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(71, 132);
+            this.label3.Location = new System.Drawing.Point(69, 190);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(167, 17);
@@ -65,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 81);
+            this.label2.Location = new System.Drawing.Point(69, 139);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(128, 17);
@@ -75,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 32);
+            this.label1.Location = new System.Drawing.Point(69, 90);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 17);
@@ -85,7 +87,7 @@
             // textBoxNumber
             // 
             this.textBoxNumber.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Number", true));
-            this.textBoxNumber.Location = new System.Drawing.Point(75, 101);
+            this.textBoxNumber.Location = new System.Drawing.Point(73, 159);
             this.textBoxNumber.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.Size = new System.Drawing.Size(509, 22);
@@ -94,7 +96,7 @@
             // textBoxFIO
             // 
             this.textBoxFIO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "FIO", true));
-            this.textBoxFIO.Location = new System.Drawing.Point(75, 52);
+            this.textBoxFIO.Location = new System.Drawing.Point(73, 110);
             this.textBoxFIO.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxFIO.Name = "textBoxFIO";
             this.textBoxFIO.Size = new System.Drawing.Size(509, 22);
@@ -104,7 +106,7 @@
             // 
             this.comboBoxAutos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAutos.FormattingEnabled = true;
-            this.comboBoxAutos.Location = new System.Drawing.Point(75, 151);
+            this.comboBoxAutos.Location = new System.Drawing.Point(73, 209);
             this.comboBoxAutos.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxAutos.Name = "comboBoxAutos";
             this.comboBoxAutos.Size = new System.Drawing.Size(509, 24);
@@ -115,11 +117,35 @@
             // 
             this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Driver.DriverViewModel);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(70, 21);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(129, 17);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Список водителей";
+            // 
+            // comboBoxDrivers
+            // 
+            this.comboBoxDrivers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDrivers.FormattingEnabled = true;
+            this.comboBoxDrivers.Location = new System.Drawing.Point(72, 42);
+            this.comboBoxDrivers.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxDrivers.Name = "comboBoxDrivers";
+            this.comboBoxDrivers.Size = new System.Drawing.Size(509, 24);
+            this.comboBoxDrivers.TabIndex = 26;
+            this.comboBoxDrivers.ValueMember = "Id";
+            this.comboBoxDrivers.SelectedIndexChanged += new System.EventHandler(this.comboBoxDrivers_SelectedIndexChanged);
+            // 
             // DriverView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 255);
+            this.ClientSize = new System.Drawing.Size(657, 319);
+            this.Controls.Add(this.comboBoxDrivers);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBoxAutos);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.label3);
@@ -146,5 +172,7 @@
         private System.Windows.Forms.TextBox textBoxFIO;
         private System.Windows.Forms.ComboBox comboBoxAutos;
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxDrivers;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OZSK.Client.Model.Abstr;
+using OZSK.Client.View;
 
 namespace OZSK.Client
 {
@@ -17,7 +18,7 @@ namespace OZSK.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainView());
+            Application.Run(new MenuView());
         }
     }
 }

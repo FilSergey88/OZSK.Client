@@ -34,7 +34,7 @@ namespace OZSK.Client.ServiceAgent
             var builder = new UriBuilder(_serviceConfig.BaseURL)
             {
                 Port = _serviceConfig.Port,
-                Path = $"{(string.IsNullOrWhiteSpace(_serviceConfig.BasePath) ? string.Empty : _serviceConfig.BasePath + "/" + _serviceConfig.ServiceName)}/api/{BuildUrl(_path, param)}",
+                Path = $"/api/{BuildUrl(_path, param)}",
                 Query = BuildUrlParams(param).ToString()
             };
 

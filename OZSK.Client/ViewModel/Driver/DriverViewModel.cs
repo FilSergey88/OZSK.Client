@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,11 +17,14 @@ namespace OZSK.Client.ViewModel.Driver
     {
         private readonly LoadAutosCommand _loadAutosCommand;
         private readonly SaveDriverCommand _saveDriverCommand;
-        
-        public DriverViewModel()
+        private readonly LoadDriverCommand _loadDriverCommand;
+        private bool _isAdd;
+        public DriverViewModel(bool isAdd)
         {
             _loadAutosCommand = new LoadAutosCommand();
             _saveDriverCommand = new SaveDriverCommand();
+            _loadDriverCommand = new LoadDriverCommand();
+            _isAdd = isAdd;
         }
 
         #region Params
@@ -37,9 +41,9 @@ namespace OZSK.Client.ViewModel.Driver
             set => SetProperty(ref _name, value);
         }
 
-        private List<Model.Abstr.Auto> _autos;
+        private ObservableCollection<Model.Abstr.Auto> _autos;
 
-        public List<Model.Abstr.Auto> Autos
+        public ObservableCollection<Model.Abstr.Auto> Autos
         {
             get => _autos;
             set => SetProperty(ref _autos, value);
@@ -56,19 +60,46 @@ namespace OZSK.Client.ViewModel.Driver
 
         public override void Initialize()
         {
-            Task.Run(async () => await _loadAutosCommand.Execute(this,null));
+            Task.Run(async () =>
+            {
+                await _loadAutosCommand.Execute(this, null);
+                if (!_isAdd)
+                    await _loadDriverCommand.Execute(this, null);
+            });
         }
+        #region Driver
+        private ObservableCollection<Model.Driver> _drivers;
+
+        public ObservableCollection<Model.Driver> Drivers
+        {
+            get => _drivers;
+            set => SetProperty(ref _drivers, value);
+        }
+
+        private Model.Driver _driver;
+
+        public Model.Driver Driver
+        {
+            get => _driver;
+            set => SetProperty(ref _driver, value);
+        }
+        #endregion
 
         public async void Save()
         {
-            var newAuto = new Model.Driver()
+            var newDriver = new Model.Driver()
             {
                 Number = Number,
                 Name = FIO,
-                EntityState = EntityState.Added,
+                EntityState = _isAdd ? EntityState.Added : EntityState.Edited,
                 AutoId = Auto?.Id ?? 0
             };
-            await _saveDriverCommand.Execute(newAuto);
+            if (!_isAdd)
+            {
+                newDriver.Ts = Driver.Ts;
+                newDriver.Id = Driver.Id;
+            }
+            await _saveDriverCommand.Execute(newDriver);
         }
     }
 }

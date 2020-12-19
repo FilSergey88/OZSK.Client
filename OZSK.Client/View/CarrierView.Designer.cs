@@ -41,14 +41,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.Save = new System.Windows.Forms.Button();
             this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBoxCarriers = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxName
             // 
             this.textBoxName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Name", true));
-            this.textBoxName.Location = new System.Drawing.Point(45, 44);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxName.Location = new System.Drawing.Point(44, 116);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(509, 22);
             this.textBoxName.TabIndex = 0;
@@ -56,8 +58,8 @@
             // textBoxAddress
             // 
             this.textBoxAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Address", true));
-            this.textBoxAddress.Location = new System.Drawing.Point(45, 94);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxAddress.Location = new System.Drawing.Point(44, 166);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(509, 22);
             this.textBoxAddress.TabIndex = 1;
@@ -65,8 +67,8 @@
             // textBoxINNKPP
             // 
             this.textBoxINNKPP.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Inn", true));
-            this.textBoxINNKPP.Location = new System.Drawing.Point(45, 144);
-            this.textBoxINNKPP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxINNKPP.Location = new System.Drawing.Point(44, 216);
+            this.textBoxINNKPP.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxINNKPP.Name = "textBoxINNKPP";
             this.textBoxINNKPP.Size = new System.Drawing.Size(509, 22);
             this.textBoxINNKPP.TabIndex = 2;
@@ -74,8 +76,8 @@
             // textBoxPhone
             // 
             this.textBoxPhone.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Phone", true));
-            this.textBoxPhone.Location = new System.Drawing.Point(45, 201);
-            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPhone.Location = new System.Drawing.Point(44, 273);
+            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(509, 22);
             this.textBoxPhone.TabIndex = 3;
@@ -83,7 +85,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 25);
+            this.label1.Location = new System.Drawing.Point(40, 97);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 17);
@@ -93,7 +95,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 74);
+            this.label2.Location = new System.Drawing.Point(40, 146);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 17);
@@ -103,7 +105,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 124);
+            this.label3.Location = new System.Drawing.Point(40, 196);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 17);
@@ -113,7 +115,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 181);
+            this.label4.Location = new System.Drawing.Point(40, 253);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
@@ -123,8 +125,8 @@
             // textBoxSEO
             // 
             this.textBoxSEO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Seo", true));
-            this.textBoxSEO.Location = new System.Drawing.Point(45, 256);
-            this.textBoxSEO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSEO.Location = new System.Drawing.Point(44, 328);
+            this.textBoxSEO.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSEO.Name = "textBoxSEO";
             this.textBoxSEO.Size = new System.Drawing.Size(509, 22);
             this.textBoxSEO.TabIndex = 8;
@@ -132,7 +134,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(48, 236);
+            this.label5.Location = new System.Drawing.Point(47, 308);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(145, 17);
@@ -142,8 +144,8 @@
             // Save
             // 
             this.Save.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Save.Location = new System.Drawing.Point(219, 316);
-            this.Save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Save.Location = new System.Drawing.Point(218, 388);
+            this.Save.Margin = new System.Windows.Forms.Padding(4);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(133, 37);
             this.Save.TabIndex = 10;
@@ -155,11 +157,35 @@
             // 
             this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Carrier.CarrierViewModel);
             // 
+            // comboBoxCarriers
+            // 
+            this.comboBoxCarriers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCarriers.FormattingEnabled = true;
+            this.comboBoxCarriers.Location = new System.Drawing.Point(43, 48);
+            this.comboBoxCarriers.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxCarriers.Name = "comboBoxCarriers";
+            this.comboBoxCarriers.Size = new System.Drawing.Size(509, 24);
+            this.comboBoxCarriers.TabIndex = 28;
+            this.comboBoxCarriers.ValueMember = "Id";
+            this.comboBoxCarriers.SelectedIndexChanged += new System.EventHandler(this.comboBoxCarriers_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(41, 27);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(151, 17);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Список перевозчиков";
+            // 
             // CarrierView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 383);
+            this.ClientSize = new System.Drawing.Size(605, 464);
+            this.Controls.Add(this.comboBoxCarriers);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxSEO);
@@ -171,7 +197,7 @@
             this.Controls.Add(this.textBoxINNKPP);
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.textBoxName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CarrierView";
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).EndInit();
@@ -194,5 +220,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
+        private System.Windows.Forms.ComboBox comboBoxCarriers;
+        private System.Windows.Forms.Label label6;
     }
 }

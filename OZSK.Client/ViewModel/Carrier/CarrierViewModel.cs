@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OZSK.Client.Model.Abstr;
+using OZSK.Client.ViewModel.Auto.Command;
 using OZSK.Client.ViewModel.Carrier.Command;
 
 namespace OZSK.Client.ViewModel.Carrier
@@ -12,12 +14,15 @@ namespace OZSK.Client.ViewModel.Carrier
 
     {
         private readonly SaveCarrierCommand _saveCarrierCommand;
-
-        public CarrierViewModel()
+        private readonly LoadCarriersCommand _loadCarriersCommand;
+        public CarrierViewModel(bool isAdd)
         {
+            _isAdd = isAdd;
+            _loadCarriersCommand = new LoadCarriersCommand();
             _saveCarrierCommand = new SaveCarrierCommand();
         }
 
+        private bool _isAdd;
         private string _name;
         private string _address;
         private string _seo;
@@ -50,8 +55,26 @@ namespace OZSK.Client.ViewModel.Carrier
         }
         public override void Initialize()
         {
-            
+            if (!_isAdd)
+                Task.Run(async () => await _loadCarriersCommand.Execute(this, null));
         }
+        #region Carrier
+        private Model.Carrier _carrier;
+
+        public Model.Carrier Carrier
+        {
+            get => _carrier;
+            set => SetProperty(ref _carrier, value);
+        }
+
+        private ObservableCollection<Model.Carrier> _carriers;
+
+        public ObservableCollection<Model.Carrier> CarrierList
+        {
+            get => _carriers;
+            set => SetProperty(ref _carriers, value);
+        }
+        #endregion
 
         public async void Save()
         {
@@ -61,9 +84,13 @@ namespace OZSK.Client.ViewModel.Carrier
                 Contact = Phone,
                 Name = Name,
                 SEO = Seo,
-                EntityState = EntityState.Added
+                EntityState = _isAdd ? EntityState.Added : EntityState.Edited,
             };
-
+            if (!_isAdd)
+            {
+                newCarrier.Ts = Carrier.Ts;
+                newCarrier.Id = Carrier.Id;
+            }
             await _saveCarrierCommand.Execute(newCarrier);
         }
     }

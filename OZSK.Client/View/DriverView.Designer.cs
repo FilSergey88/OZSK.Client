@@ -100,7 +100,7 @@
             // 
             // textBoxFIO
             // 
-            this.textBoxFIO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "FIO", true));
+            this.textBoxFIO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "Fio", true));
             this.textBoxFIO.Location = new System.Drawing.Point(73, 110);
             this.textBoxFIO.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxFIO.Name = "textBoxFIO";

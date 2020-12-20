@@ -34,12 +34,13 @@ namespace OZSK.Client.ViewModel.Driver
             get => _number;
             set => SetProperty(ref _number, value);
         }
-        public string FIO
+        public string Fio
         {
             get => _fio;
             set => SetProperty(ref _fio, value);
         }
 
+        #region Auto
         private ObservableCollection<Model.Auto> _autos;
 
         public ObservableCollection<Model.Auto> Autos
@@ -55,6 +56,10 @@ namespace OZSK.Client.ViewModel.Driver
             get => _auto;
             set => SetProperty(ref _auto, value);
         }
+
+
+        #endregion
+
         #endregion
         #region Driver
         private ObservableCollection<Model.Driver> _drivers;
@@ -89,7 +94,7 @@ namespace OZSK.Client.ViewModel.Driver
             var newDriver = new Model.Driver()
             {
                 Number = Number,
-                Name = FIO,
+                Name = Fio,
                 EntityState = _isAdd ? EntityState.Added : EntityState.Edited,
                 AutoId = Auto?.Id ?? 0
             };

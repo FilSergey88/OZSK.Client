@@ -21,6 +21,7 @@ namespace OZSK.Client
             InitializeComponent();
             comboBoxDrivers.Enabled = !isAdd;
             _viewModel.Initialize();
+            bindingSourceViewModel.DataSource = _viewModel;
 
             Extention.SetBindingList(comboBoxDrivers, _viewModel, "Drivers", "Driver");
             Extention.SetBindingList(comboBoxAutos, _viewModel, "Autos", "Auto", "FullName");
@@ -40,7 +41,7 @@ namespace OZSK.Client
         {
             if (!(sender is ComboBox cBox) || !(cBox.SelectedItem is Driver driver)) return;
             _viewModel.Driver = driver;
-            _viewModel.FIO= driver.Name;
+            _viewModel.Fio= driver.Name;
             _viewModel.Number = driver.Number;
             _viewModel.Auto= _viewModel.Autos.FirstOrDefault(q => q.Id == driver.AutoId);
         }

@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBoxTN = new System.Windows.Forms.TextBox();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxOV = new System.Windows.Forms.TextBox();
             this.textBoxConsigneeName = new System.Windows.Forms.TextBox();
             this.textBoxCount = new System.Windows.Forms.TextBox();
@@ -53,7 +54,6 @@
             this.comboBoxDrivers = new System.Windows.Forms.ComboBox();
             this.comboBoxAutos = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,6 +65,10 @@
             this.textBoxTN.Name = "textBoxTN";
             this.textBoxTN.Size = new System.Drawing.Size(105, 22);
             this.textBoxTN.TabIndex = 0;
+            // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Main.MainViewModel);
             // 
             // textBoxOV
             // 
@@ -248,6 +252,7 @@
             this.dateTimePickerDate.Name = "dateTimePickerDate";
             this.dateTimePickerDate.Size = new System.Drawing.Size(260, 22);
             this.dateTimePickerDate.TabIndex = 24;
+            this.dateTimePickerDate.ValueChanged += new System.EventHandler(this.dateTimePickerDate_ValueChanged);
             // 
             // button3
             // 
@@ -303,10 +308,6 @@
             this.button1.Text = "Выйти";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // bindingSourceViewModel
-            // 
-            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Main.MainViewModel);
             // 
             // MainView
             // 

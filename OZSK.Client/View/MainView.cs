@@ -111,5 +111,13 @@ namespace OZSK.Client
                 _viewModel.ShippingName = shippingName;
             }
         }
+
+        private void dateTimePickerDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (sender is DateTimePicker dPicker )
+            {
+                _viewModel.Date = dPicker.Value;
+            }
+        }
     }
 }

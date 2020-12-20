@@ -349,6 +349,7 @@ namespace OZSK.Client.ViewModel.Main
                 worksheet.Cells["L2"].Value = Cipher.Name;
                 worksheet.Cells["C4"].Value = Carrier.Name;
                 worksheet.Cells["E4"].Value = Consignee.Name;
+                worksheet.Cells["A10"].Value = ShippingName.Name;
                 worksheet.Cells["E10"].Value = Count;
                 worksheet.Cells["G10"].Value = $"{Auto.Brand} {Auto.Number}";
                 worksheet.Cells["J10"].Value = Tn;

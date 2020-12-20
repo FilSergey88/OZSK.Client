@@ -110,8 +110,8 @@ namespace OZSK.Client.ViewModel.Driver
             var driver = new Model.Driver
             {
                 EntityState = EntityState.Deleted,
-                Ts = Auto.Ts,
-                Id = Auto.Id
+                Ts = Driver.Ts,
+                Id = Driver.Id
             };
 
 

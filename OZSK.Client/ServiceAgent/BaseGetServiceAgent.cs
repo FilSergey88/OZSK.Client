@@ -17,13 +17,14 @@ namespace OZSK.Client.ServiceAgent
     {
         private string _path;
         private readonly ServiceConfig _serviceConfig;
+
         public BaseGetServiceAgent(string path)
         {
             _path = path;
             _serviceConfig = new ServiceConfig
             {
                 BaseURL = Constant.BaseURl,
-                Port = Constant.Port 
+                Port = Constant.Port
             };
         }
 
@@ -40,7 +41,7 @@ namespace OZSK.Client.ServiceAgent
 
             var uri = builder.ToString();
 
-            HttpResponseMessage response = await CallAsync(cancellationToken, client, uri);
+            var response = await CallAsync(cancellationToken, client, uri);
 
             if (response.IsSuccessStatusCode)
             {
@@ -59,10 +60,12 @@ namespace OZSK.Client.ServiceAgent
                 throw new Exception(exception);
             }
         }
+
         protected virtual NameValueCollection BuildUrlParams(TParam param)
         {
             return HttpUtility.ParseQueryString(param?.ToString());
         }
+
         protected virtual async Task<TResult> ProcessResponse(HttpResponseMessage response)
         {
             var result = await response.Content.ReadAsStringAsync();
@@ -72,10 +75,13 @@ namespace OZSK.Client.ServiceAgent
 
             return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(result));
         }
-        protected virtual async Task<HttpResponseMessage> CallAsync(CancellationToken cancellationToken, HttpClient client, string uri)
+
+        protected virtual async Task<HttpResponseMessage> CallAsync(CancellationToken cancellationToken,
+            HttpClient client, string uri)
         {
             return await client.GetAsync(uri, cancellationToken);
         }
+
         protected virtual string BuildUrl(string baseUrl, TParam param)
         {
             return baseUrl;

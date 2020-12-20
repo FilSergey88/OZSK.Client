@@ -15,12 +15,13 @@ using OZSK.Client.ViewModel.Driver.Command;
 
 namespace OZSK.Client.ViewModel.Auto
 {
-    public class AutoViewModel : BaseViewModel
+        
+    public class AutoViewModel : BaseViewModel, IHasCarrierList, IHasAutos
     {
         private readonly LoadCarriersCommand _loadCarriersCommand;
         private readonly SaveAutoCommand _saveCarrierCommand;
         private readonly LoadAutosCommand _loadAutosCommand;
-        private bool _isAdd;
+        private readonly bool _isAdd;
 
         public AutoViewModel(bool isAdd)
         {
@@ -32,10 +33,7 @@ namespace OZSK.Client.ViewModel.Auto
 
         #region Params
 
-        private string _model;
-        private string _number;
-        private string _sts;
-        private string _pts;
+        private string _model, _number, _sts, _pts;
 
         public string Model
         {
@@ -84,10 +82,30 @@ namespace OZSK.Client.ViewModel.Auto
 
         #endregion
 
+        #region Auto
+        private ObservableCollection<Model.Auto> _autos;
+
+        public ObservableCollection<Model.Auto> Autos
+        {
+            get => _autos;
+            set => SetProperty(ref _autos, value);
+        }
+
+        private Model.Auto _auto;
+
+        public Model.Auto Auto
+        {
+            get => _auto;
+            set => SetProperty(ref _auto, value);
+        }
+
+
+
+        #endregion
 
         public async void Save()
         {
-            var newAuto = new Model.Abstr.Auto
+            var newAuto = new Model.Auto
             {
                 Number = Number,
                 Brand = Model,
@@ -115,32 +133,11 @@ namespace OZSK.Client.ViewModel.Auto
             });
         }
 
-        private ObservableCollection<Model.Abstr.Auto> _autos;
-
-        public ObservableCollection<Model.Abstr.Auto> Autos
-        {
-            get => _autos;
-            set => SetProperty(ref _autos, value);
-        }
-
-        private Model.Abstr.Auto _auto;
-
-        public Model.Abstr.Auto Auto
-        {
-            get => _auto;
-            set => SetProperty(ref _auto, value);
-        }
-
         public async void Delete()
         {
-            var newAuto = new Model.Abstr.Auto
+            var newAuto = new Model.Auto
             {
-                Number = Number,
-                Brand = Model,
-                PTS = PTS,
-                STS = STS,
                 EntityState = EntityState.Deleted,
-                CarrierId = Carrier?.Id ?? 0,
                 Ts = Auto.Ts,
                 Id =  Auto.Id
             };

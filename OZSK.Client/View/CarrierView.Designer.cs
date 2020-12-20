@@ -40,9 +40,10 @@
             this.textBoxSEO = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Save = new System.Windows.Forms.Button();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxCarriers = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,10 +154,6 @@
             this.Save.UseVisualStyleBackColor = true;
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
-            // bindingSourceViewModel
-            // 
-            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Carrier.CarrierViewModel);
-            // 
             // comboBoxCarriers
             // 
             this.comboBoxCarriers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -179,11 +176,28 @@
             this.label6.TabIndex = 27;
             this.label6.Text = "Список перевозчиков";
             // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Carrier.CarrierViewModel);
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(419, 388);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 37);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Удалить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CarrierView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(605, 464);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxCarriers);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Save);
@@ -222,5 +236,6 @@
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
         private System.Windows.Forms.ComboBox comboBoxCarriers;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button1;
     }
 }

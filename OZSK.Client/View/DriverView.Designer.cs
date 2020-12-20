@@ -34,11 +34,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxFIO = new System.Windows.Forms.TextBox();
             this.comboBoxAutos = new System.Windows.Forms.ComboBox();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxDrivers = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,6 +94,10 @@
             this.textBoxNumber.Size = new System.Drawing.Size(509, 22);
             this.textBoxNumber.TabIndex = 12;
             // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Driver.DriverViewModel);
+            // 
             // textBoxFIO
             // 
             this.textBoxFIO.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceViewModel, "FIO", true));
@@ -104,6 +109,7 @@
             // 
             // comboBoxAutos
             // 
+            this.comboBoxAutos.DisplayMember = "Id";
             this.comboBoxAutos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAutos.FormattingEnabled = true;
             this.comboBoxAutos.Location = new System.Drawing.Point(73, 209);
@@ -112,10 +118,7 @@
             this.comboBoxAutos.Size = new System.Drawing.Size(509, 24);
             this.comboBoxAutos.TabIndex = 24;
             this.comboBoxAutos.ValueMember = "Id";
-            // 
-            // bindingSourceViewModel
-            // 
-            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Driver.DriverViewModel);
+            this.comboBoxAutos.SelectedIndexChanged += new System.EventHandler(this.comboBoxAutos_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -129,6 +132,7 @@
             // 
             // comboBoxDrivers
             // 
+            this.comboBoxDrivers.DisplayMember = "Id";
             this.comboBoxDrivers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDrivers.FormattingEnabled = true;
             this.comboBoxDrivers.Location = new System.Drawing.Point(72, 42);
@@ -139,11 +143,24 @@
             this.comboBoxDrivers.ValueMember = "Id";
             this.comboBoxDrivers.SelectedIndexChanged += new System.EventHandler(this.comboBoxDrivers_SelectedIndexChanged);
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Location = new System.Drawing.Point(448, 257);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(133, 37);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Удалить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DriverView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(657, 319);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxDrivers);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBoxAutos);
@@ -174,5 +191,6 @@
         private System.Windows.Forms.BindingSource bindingSourceViewModel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxDrivers;
+        private System.Windows.Forms.Button button1;
     }
 }

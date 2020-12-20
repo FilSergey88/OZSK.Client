@@ -29,40 +29,12 @@ namespace OZSK.Client
             _viewModel.Initialize();
             dateTimePickerDate.Value = DateTime.Now.Date;
             bindingSourceViewModel.DataSource = _viewModel;
-            ComboBoxCipherList.DataBindings.Add("DataSource", _viewModel, "Cipherlists", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            ComboBoxCipherList.DisplayMember = "Name";
-            ComboBoxCipherList.ValueMember = "Id";
-            ComboBoxCipherList.DataBindings.Add("SelectedItem", _viewModel, "Cipher", true,
-                DataSourceUpdateMode.OnPropertyChanged);
 
-            comboBoxNameShipping.DataBindings.Add("DataSource", _viewModel, nameof(_viewModel.ShippingNames), true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxNameShipping.DisplayMember = "Name";
-            comboBoxNameShipping.ValueMember = "Id";
-            comboBoxNameShipping.DataBindings.Add("SelectedItem", _viewModel, nameof(_viewModel.ShippingName), true,
-                DataSourceUpdateMode.OnPropertyChanged);
-
-            comboBoxCarriers.DataBindings.Add("DataSource", _viewModel, "CarrierList", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxCarriers.DisplayMember = "Name";
-            comboBoxCarriers.ValueMember = "Id";
-            comboBoxCarriers.DataBindings.Add("SelectedItem", _viewModel, "Carrier", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-
-            comboBoxAutos.DataBindings.Add("DataSource", _viewModel, "Autos", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxAutos.DisplayMember = "FullName";
-            comboBoxAutos.ValueMember = "Id";
-            comboBoxAutos.DataBindings.Add("SelectedItem", _viewModel, "Auto", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-
-            comboBoxDrivers.DataBindings.Add("DataSource", _viewModel, "Drivers", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxDrivers.DisplayMember = "Name";
-            comboBoxDrivers.ValueMember = "Id";
-            comboBoxDrivers.DataBindings.Add("SelectedItem", _viewModel, "Driver", true,
-                DataSourceUpdateMode.OnPropertyChanged);
+            Extention.SetBindingList(comboBoxDrivers, _viewModel, "Drivers", "Driver");
+            Extention.SetBindingList(comboBoxAutos, _viewModel, "Autos", "Auto", "FullName");
+            Extention.SetBindingList(comboBoxCarriers, _viewModel, "CarrierList", "Carrier");
+            Extention.SetBindingList(ComboBoxCipherList, _viewModel, "Cipherlists", "Cipher");
+            Extention.SetBindingList(comboBoxNameShipping, _viewModel, nameof(_viewModel.ShippingNames), nameof(_viewModel.ShippingName));
 
             while (!(_viewModel.ShippingNames?.Any() ?? false) && 
                    !(_viewModel.Cipherlists?.Any() ?? false) &&
@@ -92,21 +64,16 @@ namespace OZSK.Client
 
         private void comboBoxCarriers_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (comboBoxCarriers.SelectedItem is  Carrier carrier)
-            {
-                _viewModel.Carrier = carrier;
-                _viewModel.LoadAuto();
-
-            }
+            if (!(comboBoxCarriers.SelectedItem is Carrier carrier)) return;
+            _viewModel.Carrier = carrier;
+            _viewModel.LoadAuto();
         }
 
         private void comboBoxAutos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxAutos.SelectedItem is Auto auto)
-            {
-                _viewModel.Auto = auto;
-                _viewModel.LoadDriver();
-            }
+            if (!(comboBoxAutos.SelectedItem is Auto auto)) return;
+            _viewModel.Auto = auto;
+            _viewModel.LoadDriver();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -125,7 +92,24 @@ namespace OZSK.Client
         private void button3_Click(object sender, EventArgs e)
         {
             button3.Enabled = !_viewModel.LoadInOV();
+        }
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void MainView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _viewModel.SaveNumbers();
+        }
+
+        private void comboBoxNameShipping_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox cBox && cBox.SelectedItem is ShippingName shippingName)
+            {
+                _viewModel.ShippingName = shippingName;
+            }
         }
     }
 }

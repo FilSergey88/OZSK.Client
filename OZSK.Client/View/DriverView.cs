@@ -15,28 +15,17 @@ namespace OZSK.Client
     public partial class DriverView : Form
     {
         private readonly DriverViewModel _viewModel;
-        public DriverView(bool IsAdd)
+        public DriverView(bool isAdd)
         {
-            _viewModel = new DriverViewModel(IsAdd);
+            _viewModel = new DriverViewModel(isAdd);
             InitializeComponent();
-
-
-            comboBoxDrivers.Enabled = !IsAdd;
-            comboBoxDrivers.DataBindings.Add("DataSource", _viewModel, "Drivers", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxDrivers.DisplayMember = "Name";
-            comboBoxDrivers.ValueMember = "Id";
-            comboBoxDrivers.DataBindings.Add("SelectedItem", _viewModel, "Driver", true,
-                DataSourceUpdateMode.OnPropertyChanged);
+            comboBoxDrivers.Enabled = !isAdd;
             _viewModel.Initialize();
-            bindingSourceViewModel.DataSource = _viewModel;
-            comboBoxAutos.DataBindings.Add("DataSource", _viewModel, "Autos", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxAutos.DisplayMember = "FullName";
-            comboBoxAutos.ValueMember = "Id";
-            comboBoxAutos.DataBindings.Add("SelectedItem", _viewModel, "Auto", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            while (!(_viewModel.Autos?.Any() ?? false) && (IsAdd || !(_viewModel.Drivers?.Any() ?? false)))
+
+            Extention.SetBindingList(comboBoxDrivers, _viewModel, "Drivers", "Driver");
+            Extention.SetBindingList(comboBoxAutos, _viewModel, "Autos", "Auto", "FullName");
+
+            while (!(_viewModel.Autos?.Any() ?? false) && (isAdd || !(_viewModel.Drivers?.Any() ?? false)))
             {
                 this.Refresh();
             }
@@ -45,19 +34,26 @@ namespace OZSK.Client
         private void Save_Click(object sender, EventArgs e)
         {
             _viewModel.Save();
-
         }
 
         private void comboBoxDrivers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is ComboBox cBox && cBox.SelectedItem is Driver driver)
-            {
-                _viewModel.Driver = driver;
-                _viewModel.FIO= driver.Name;
-                _viewModel.Number = driver.Number;
-                _viewModel.Auto= _viewModel.Autos.FirstOrDefault(q => q.Id == driver.AutoId);
+            if (!(sender is ComboBox cBox) || !(cBox.SelectedItem is Driver driver)) return;
+            _viewModel.Driver = driver;
+            _viewModel.FIO= driver.Name;
+            _viewModel.Number = driver.Number;
+            _viewModel.Auto= _viewModel.Autos.FirstOrDefault(q => q.Id == driver.AutoId);
+        }
 
-            }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _viewModel.Delete();
+        }
+
+        private void comboBoxAutos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(sender is ComboBox cBox) || !(cBox.SelectedItem is Auto auto)) return;
+            _viewModel.Auto = auto;
         }
     }
 }

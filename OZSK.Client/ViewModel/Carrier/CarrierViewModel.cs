@@ -10,11 +10,12 @@ using OZSK.Client.ViewModel.Carrier.Command;
 
 namespace OZSK.Client.ViewModel.Carrier
 {
-    public class CarrierViewModel : BaseViewModel
+    public class CarrierViewModel : BaseViewModel, IHasCarrierList
 
     {
         private readonly SaveCarrierCommand _saveCarrierCommand;
         private readonly LoadCarriersCommand _loadCarriersCommand;
+        private readonly bool _isAdd;
         public CarrierViewModel(bool isAdd)
         {
             _isAdd = isAdd;
@@ -22,12 +23,8 @@ namespace OZSK.Client.ViewModel.Carrier
             _saveCarrierCommand = new SaveCarrierCommand();
         }
 
-        private bool _isAdd;
-        private string _name;
-        private string _address;
-        private string _seo;
-        private string _phone;
-        private string _inn;
+        #region params
+        private string _name, _address, _seo, _phone, _inn;
         public string Name
         {
             get => _name;
@@ -53,11 +50,7 @@ namespace OZSK.Client.ViewModel.Carrier
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-        public override void Initialize()
-        {
-            if (!_isAdd)
-                Task.Run(async () => await _loadCarriersCommand.Execute(this, null));
-        }
+        #endregion
         #region Carrier
         private Model.Carrier _carrier;
 
@@ -76,6 +69,12 @@ namespace OZSK.Client.ViewModel.Carrier
         }
         #endregion
 
+        public override void Initialize()
+        {
+            if (!_isAdd)
+                Task.Run(async () => await _loadCarriersCommand.Execute(this, null));
+        }
+
         public async void Save()
         {
             var newCarrier = new Model.Carrier
@@ -93,6 +92,18 @@ namespace OZSK.Client.ViewModel.Carrier
                 newCarrier.Id = Carrier.Id;
             }
             await _saveCarrierCommand.Execute(newCarrier);
+        }
+
+        public async void Delete()
+        {
+            var driver = new Model.Carrier
+            {
+                EntityState = EntityState.Deleted,
+                Ts = Carrier.Ts,
+                Id = Carrier.Id
+            };
+
+            await _saveCarrierCommand.Execute(driver);
         }
     }
 }

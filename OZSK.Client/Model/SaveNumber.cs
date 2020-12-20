@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace OZSK.Client.Model
 {
-    public class DTOTN
+    public class SaveNumber
     {
-        public string ShippingName { get; set; }
+        public int OvNumber { get; set; }
+        public int TnNumber { get; set; }
     }
 }

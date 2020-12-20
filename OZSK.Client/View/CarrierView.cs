@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OZSK.Client.Model;
+using OZSK.Client.Model.Abstr;
 using OZSK.Client.ViewModel.Carrier;
 
 namespace OZSK.Client
@@ -23,19 +24,12 @@ namespace OZSK.Client
             _viewModel.Initialize();
             bindingSourceViewModel.DataSource = _viewModel;
 
+            Extention.SetBindingList(comboBoxCarriers, _viewModel, "CarrierList", "Carrier");
 
-            comboBoxCarriers.DataBindings.Add("DataSource", _viewModel, "CarrierList", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            comboBoxCarriers.DisplayMember = "Name";
-            comboBoxCarriers.ValueMember = "Id";
-            comboBoxCarriers.DataBindings.Add("SelectedItem", _viewModel, "Carrier", true,
-                DataSourceUpdateMode.OnPropertyChanged);
-            if (!isAdd)
+            if (isAdd) return;
+            while (!(_viewModel.CarrierList?.Any() ?? false))
             {
-                while (!(_viewModel.CarrierList?.Any() ?? false))
-                {
-                    this.Refresh();
-                }
+                this.Refresh();
             }
         }
 
@@ -46,15 +40,18 @@ namespace OZSK.Client
 
         private void comboBoxCarriers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is ComboBox cBox && cBox.SelectedItem is Carrier carrier)
-            {
-                _viewModel.Carrier = carrier;
-                _viewModel.Name = carrier.Name;
-                _viewModel.Address = carrier.Address;
-                _viewModel.Inn = carrier.INN;
-                _viewModel.Phone= carrier.Contact;
-                _viewModel.Seo = carrier.SEO;
-            }
+            if (!(sender is ComboBox cBox) || !(cBox.SelectedItem is Carrier carrier)) return;
+            _viewModel.Carrier = carrier;
+            _viewModel.Name = carrier.Name;
+            _viewModel.Address = carrier.Address;
+            _viewModel.Inn = carrier.INN;
+            _viewModel.Phone= carrier.Contact;
+            _viewModel.Seo = carrier.SEO;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _viewModel.Delete();
         }
     }
 }

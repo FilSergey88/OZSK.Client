@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OZSK.Client.Model.Abstr;
 
-namespace OZSK.Client.Model.Abstr
+namespace OZSK.Client.Model
 {
     public class Auto : IHasEntityState
     {

@@ -24,26 +24,12 @@ namespace OZSK.Client.ViewModel.Auto.Command
             var path = "Carrier";
             _serviceAgent = new BaseGetServiceAgent<BaseParams, ICollection<Model.Carrier>>(path);
         }
-        public async Task Execute(AutoViewModel viewModel,object parameter)
+        public async Task Execute(IHasCarrierList viewModel,object parameter)
         {
             if (!CanExecute(parameter))
                 return;
             var result =  await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
             viewModel.CarrierList =  new ObservableCollection<Model.Carrier>(result.ToList());result.ToList();
-        }
-        public async Task Execute(MainViewModel viewModel, object parameter)
-        {
-            if (!CanExecute(parameter))
-                return;
-            var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            viewModel.CarrierList = new ObservableCollection<Model.Carrier>(result.ToList()); 
-        }
-        public async Task Execute(CarrierViewModel viewModel, object parameter)
-        {
-            if (!CanExecute(parameter))
-                return;
-            var result = await _serviceAgent.Execute(new BaseParams(), new CancellationToken());
-            viewModel.CarrierList = new ObservableCollection<Model.Carrier>(result.ToList());
         }
         public bool CanExecute(object parameter)
         {

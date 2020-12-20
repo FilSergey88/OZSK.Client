@@ -27,7 +27,6 @@ namespace OZSK.Client.ServiceAgent
         {
             using var client = HttpClientBuilder.CreateClient();
             var content = CreateStringContent(param);
-            var paramsss = JsonConvert.SerializeObject(param);
             var builder = new UriBuilder(_serviceConfig.BaseURL)
             {
                 Port = _serviceConfig.Port,
@@ -45,7 +44,7 @@ namespace OZSK.Client.ServiceAgent
                 if (string.IsNullOrWhiteSpace(result))
                     return default(TResult);
 
-                return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(result));
+                return await Task.Run(() => JsonConvert.DeserializeObject<TResult>(result), cancellationToken);
             }
             else
             {

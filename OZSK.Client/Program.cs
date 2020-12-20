@@ -18,7 +18,15 @@ namespace OZSK.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuView());
+            try
+            {
+                Application.Run(new MenuView());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK);
+            }
+            
         }
     }
 }

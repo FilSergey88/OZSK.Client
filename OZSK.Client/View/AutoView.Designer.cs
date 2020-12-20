@@ -36,6 +36,7 @@ namespace OZSK.Client
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPTS = new System.Windows.Forms.TextBox();
+            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxModel = new System.Windows.Forms.TextBox();
             this.textBoxSTS = new System.Windows.Forms.TextBox();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
@@ -44,7 +45,6 @@ namespace OZSK.Client
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxAuto = new System.Windows.Forms.ComboBox();
-            this.bindingSourceViewModel = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +52,7 @@ namespace OZSK.Client
             // buttonSave
             // 
             this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonSave.Location = new System.Drawing.Point(196, 356);
+            this.buttonSave.Location = new System.Drawing.Point(217, 356);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(133, 37);
@@ -99,6 +99,10 @@ namespace OZSK.Client
             this.textBoxPTS.Name = "textBoxPTS";
             this.textBoxPTS.Size = new System.Drawing.Size(509, 22);
             this.textBoxPTS.TabIndex = 26;
+            // 
+            // bindingSourceViewModel
+            // 
+            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Auto.AutoViewModel);
             // 
             // textBoxModel
             // 
@@ -148,6 +152,7 @@ namespace OZSK.Client
             this.comboBoxCarriers.Size = new System.Drawing.Size(509, 24);
             this.comboBoxCarriers.TabIndex = 34;
             this.comboBoxCarriers.ValueMember = "Id";
+            this.comboBoxCarriers.SelectedIndexChanged += new System.EventHandler(this.comboBoxCarriers_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -182,14 +187,10 @@ namespace OZSK.Client
             this.comboBoxAuto.ValueMember = "Id";
             this.comboBoxAuto.SelectedIndexChanged += new System.EventHandler(this.comboBoxAuto_SelectedIndexChanged);
             // 
-            // bindingSourceViewModel
-            // 
-            this.bindingSourceViewModel.DataSource = typeof(OZSK.Client.ViewModel.Auto.AutoViewModel);
-            // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(372, 356);
+            this.button1.Location = new System.Drawing.Point(391, 356);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 37);

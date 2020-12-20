@@ -13,12 +13,12 @@ using OZSK.Client.ViewModel.Driver.Command;
 
 namespace OZSK.Client.ViewModel.Driver
 {
-    public class DriverViewModel : BaseViewModel
+    public class DriverViewModel : BaseViewModel, IHasAutos
     {
         private readonly LoadAutosCommand _loadAutosCommand;
         private readonly SaveDriverCommand _saveDriverCommand;
         private readonly LoadDriverCommand _loadDriverCommand;
-        private bool _isAdd;
+        private readonly bool _isAdd;
         public DriverViewModel(bool isAdd)
         {
             _loadAutosCommand = new LoadAutosCommand();
@@ -28,8 +28,7 @@ namespace OZSK.Client.ViewModel.Driver
         }
 
         #region Params
-        private string _number;
-        private string _name;
+        private string _number, _fio;
         public string Number
         {
             get => _number;
@@ -37,36 +36,26 @@ namespace OZSK.Client.ViewModel.Driver
         }
         public string FIO
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _fio;
+            set => SetProperty(ref _fio, value);
         }
 
-        private ObservableCollection<Model.Abstr.Auto> _autos;
+        private ObservableCollection<Model.Auto> _autos;
 
-        public ObservableCollection<Model.Abstr.Auto> Autos
+        public ObservableCollection<Model.Auto> Autos
         {
             get => _autos;
             set => SetProperty(ref _autos, value);
 
         }
 
-        private Model.Abstr.Auto _auto;
-        public Model.Abstr.Auto Auto
+        private Model.Auto _auto;
+        public Model.Auto Auto
         {
             get => _auto;
             set => SetProperty(ref _auto, value);
         }
         #endregion
-
-        public override void Initialize()
-        {
-            Task.Run(async () =>
-            {
-                await _loadAutosCommand.Execute(this, null);
-                if (!_isAdd)
-                    await _loadDriverCommand.Execute(this, null);
-            });
-        }
         #region Driver
         private ObservableCollection<Model.Driver> _drivers;
 
@@ -85,6 +74,16 @@ namespace OZSK.Client.ViewModel.Driver
         }
         #endregion
 
+        public override void Initialize()
+        {
+            Task.Run(async () =>
+            {
+                await _loadAutosCommand.Execute(this, null);
+                if (!_isAdd)
+                    await _loadDriverCommand.Execute(this, null);
+            });
+        }
+
         public async void Save()
         {
             var newDriver = new Model.Driver()
@@ -100,6 +99,18 @@ namespace OZSK.Client.ViewModel.Driver
                 newDriver.Id = Driver.Id;
             }
             await _saveDriverCommand.Execute(newDriver);
+        }
+        public async void Delete()
+        {
+            var driver = new Model.Driver
+            {
+                EntityState = EntityState.Deleted,
+                Ts = Auto.Ts,
+                Id = Auto.Id
+            };
+
+
+            await _saveDriverCommand.Execute(driver);
         }
     }
 }

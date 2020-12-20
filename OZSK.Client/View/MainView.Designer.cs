@@ -207,6 +207,7 @@
             this.comboBoxNameShipping.Size = new System.Drawing.Size(361, 24);
             this.comboBoxNameShipping.TabIndex = 20;
             this.comboBoxNameShipping.ValueMember = "Id";
+            this.comboBoxNameShipping.SelectedValueChanged += new System.EventHandler(this.comboBoxNameShipping_SelectedValueChanged);
             // 
             // label8
             // 
@@ -301,6 +302,7 @@
             this.button1.TabIndex = 32;
             this.button1.Text = "Выйти";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bindingSourceViewModel
             // 
@@ -338,6 +340,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainView";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainView_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceViewModel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

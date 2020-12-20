@@ -12,22 +12,22 @@ namespace OZSK.Client.ViewModel.Auto.Command
 {
     public class SaveAutoCommand
     {
-        private readonly BasePostServiceAgent<Model.Abstr.Auto, object> _serviceAgent;
+        private readonly BasePostServiceAgent<Model.Auto, object> _serviceAgent;
 
         public SaveAutoCommand()
         {
             var path = "Auto/CreateOrUpdate";
-            _serviceAgent = new BasePostServiceAgent<Model.Abstr.Auto, object>(path);
+            _serviceAgent = new BasePostServiceAgent<Model.Auto, object>(path);
         }
         public async Task Execute(object parameter)
         {
             if (!CanExecute(parameter))
                 return;
-            await _serviceAgent.Execute((Model.Abstr.Auto)parameter, new CancellationToken());
+            await _serviceAgent.Execute((Model.Auto)parameter, new CancellationToken());
         }
         public bool CanExecute(object parameter)
         {
-            return (parameter is Model.Abstr.Auto);
+            return (parameter is Model.Auto);
         }
     }
 }

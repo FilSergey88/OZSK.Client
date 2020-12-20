@@ -10,10 +10,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using OfficeOpenXml;
 using OZSK.Client.Annotations;
-using OZSK.Client.Excel;
 using OZSK.Client.Model;
+using OZSK.Client.Model.Abstr;
 using OZSK.Client.ViewModel;
 using OZSK.Client.ViewModel.Auto.Command;
 using OZSK.Client.ViewModel.Main.Command;
@@ -21,23 +22,52 @@ using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace OZSK.Client.ViewModel.Main
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel, IHasCarrierList
     {
         private readonly LoadCipherListCommand _loadCipherListCommand;
         private readonly LoadShippingNameCommand _loadShippingNameCommand;
         private readonly LoadCarriersCommand _loadCarriersCommand;
-        private readonly LoadAutoByCarrierIdCommand _loadAutoByCarrierIdCommand;
 
         public MainViewModel()
         {
-            _loadAutoByCarrierIdCommand = new LoadAutoByCarrierIdCommand();
             _loadCipherListCommand = new LoadCipherListCommand();
             _loadShippingNameCommand = new LoadShippingNameCommand();
             _loadCarriersCommand = new LoadCarriersCommand();
+           
         }
 
+        private void GetNumbers()
+        {
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
+            var path = @$"{basePath}number.txt";
+            if (File.Exists(path))
+            {
+                var str = File.ReadAllText(path);
+                var number = JsonConvert.DeserializeObject<SaveNumber>(str);
+                Ov = number.OvNumber;
+                Tn = number.TnNumber;
+                return;
+            }
+
+            Ov = 13000;
+            Tn = 5000;
+        }
+        public void SaveNumbers()
+        {
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
+            var path = @$"{basePath}number.txt";
+            var str = JsonConvert.SerializeObject(new SaveNumber
+            {
+                TnNumber = Tn+1,
+                OvNumber = Ov+1
+            });
+            using var fstream = new FileStream($"{path}", FileMode.OpenOrCreate);
+            var array = Encoding.Default.GetBytes(str);
+            fstream.Write(array, 0, array.Length);
+        }
         public override void Initialize()
         {
+            GetNumbers();
             Task.Run(async () =>
             {
                 await _loadCipherListCommand.Execute(this, null);
@@ -132,17 +162,17 @@ namespace OZSK.Client.ViewModel.Main
 
         #region Auto
 
-        private ObservableCollection<Model.Abstr.Auto> _autos;
+        private ObservableCollection<Model.Auto> _autos;
 
-        public ObservableCollection<Model.Abstr.Auto> Autos
+        public ObservableCollection<Model.Auto> Autos
         {
             get => _autos;
             set => SetProperty(ref _autos, value);
         }
 
-        private Model.Abstr.Auto _auto;
+        private Model.Auto _auto;
 
-        public Model.Abstr.Auto Auto
+        public Model.Auto Auto
         {
             get => _auto;
             set => SetProperty(ref _auto, value);
@@ -172,8 +202,7 @@ namespace OZSK.Client.ViewModel.Main
 
         #region Params
 
-        private int _tn;
-        private int _ov;
+        private int _tn, _ov, _count;
 
         public int Ov
         {
@@ -186,8 +215,6 @@ namespace OZSK.Client.ViewModel.Main
             get => _tn;
             set => SetProperty(ref _tn, value);
         }
-
-        private int _count;
 
         public int Count
         {
@@ -217,7 +244,7 @@ namespace OZSK.Client.ViewModel.Main
         {
             if (Carrier != null)
             {
-                Autos = new ObservableCollection<Model.Abstr.Auto>
+                Autos = new ObservableCollection<Model.Auto>
                 (CarrierList?.FirstOrDefault(q => q.Id == Carrier.Id)
                     ?.Autos?
                     .ToList()!);
@@ -339,5 +366,7 @@ namespace OZSK.Client.ViewModel.Main
                 return false;
             }
         }
+
+        
     }
 }

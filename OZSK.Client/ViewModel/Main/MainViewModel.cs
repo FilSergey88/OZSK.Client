@@ -265,11 +265,21 @@ namespace OZSK.Client.ViewModel.Main
                     .ToList()!);
             }
         }
+        public string DriverName { get; set; }
 
+        private void SetDriverName()
+        {
+            var split = Driver.Name.Split(' ');
+            DriverName = split.First() + " " +
+                   string.Join(" ",
+                       split.Skip(1)
+                           .Select(s => string.Format("{0}.", s.First())));
+        }
         public bool LoadInTN()
         {
             try
             {
+                SetDriverName();
                 Directory.CreateDirectory(@"C:\Создать ТН");
                 Directory.CreateDirectory(@$"C:\Создать ТН\{Cipher.Name}");
 
@@ -286,6 +296,8 @@ namespace OZSK.Client.ViewModel.Main
                 worksheet.Cells["BB9"].Value = Ov;
                 worksheet.Cells["AJ9"].Value = Date.Date.ToString("yyyy-MM-dd");
                 worksheet.Cells["AH14"].Value = $"{Consignee.Name} {Consignee.Address} {Consignee.Contact}";
+                worksheet.Cells["AH43"].Value = $"{Consignee.Name} {Consignee.Address} {Consignee.Contact}";
+
                 worksheet.Cells["B18"].Value = Consignee.Name;
                 worksheet.Cells["B19"].Value = $"{ShippingName.Name} {Massa} кг";
                 worksheet.Cells["B20"].Value = $"{ShippingName.Name} {Massa} кг";
@@ -296,13 +308,13 @@ namespace OZSK.Client.ViewModel.Main
                 ;
                 worksheet.Cells["R47"].Value = Date.Date.ToString("yyyy-MM-dd");
                 ;
-                worksheet.Cells["R55"].Value = Driver.Name;
+                worksheet.Cells["R55"].Value = DriverName;
                 worksheet.Cells["AH49"].Value = ShippingName.Name;
                 worksheet.Cells["B51"].Value = Massa;
                 worksheet.Cells["R51"].Value = Count;
                 worksheet.Cells["AH51"].Value = Massa;
                 worksheet.Cells["AX51"].Value = Count;
-                worksheet.Cells["AX55"].Value = Driver.Name;
+                worksheet.Cells["AX55"].Value = DriverName;
                 worksheet.Cells["B75"].Value = Date.Date.ToString("yyyy-MM-dd");
                 ;
                 worksheet.Cells["Q75"].Value = $"{Carrier.Name} {Carrier.SEO}";
@@ -310,7 +322,7 @@ namespace OZSK.Client.ViewModel.Main
                     $"{Carrier.Name} {Carrier.Address} {Carrier.INN} {Carrier.Contact} {Carrier.SEO}";
                 worksheet.Cells["B82"].Value =
                     $"{Carrier.Name} {Carrier.Address} {Carrier.INN} {Carrier.Contact} {Carrier.SEO}";
-                worksheet.Cells["J84"].Value = Driver.Name;
+                worksheet.Cells["J84"].Value = DriverName;
                 worksheet.Cells["B87"].Value = Auto.Brand;
                 worksheet.Cells["AM87"].Value = Auto.Number;
                 worksheet.Cells["S121"].Value = Date.Date.ToString("yyyy-MM-dd");
@@ -334,6 +346,7 @@ namespace OZSK.Client.ViewModel.Main
         {
             try
             {
+                SetDriverName();
                 Directory.CreateDirectory(@"C:\Создать ОВ");
                 Directory.CreateDirectory(@$"C:\Создать ОВ\{Cipher.Name}");
 

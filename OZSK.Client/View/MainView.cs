@@ -67,6 +67,8 @@ namespace OZSK.Client
             if (!(comboBoxCarriers.SelectedItem is Carrier carrier)) return;
             _viewModel.Carrier = carrier;
             _viewModel.LoadAuto();
+            comboBoxAutos.SelectedItem = _viewModel.Auto;
+            this.Refresh();
         }
 
         private void comboBoxAutos_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,6 +76,8 @@ namespace OZSK.Client
             if (!(comboBoxAutos.SelectedItem is Auto auto)) return;
             _viewModel.Auto = auto;
             _viewModel.LoadDriver();
+            comboBoxDrivers.SelectedItem = _viewModel.Driver;
+            this.Refresh();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -87,6 +91,7 @@ namespace OZSK.Client
             {
                 _viewModel.Driver= driver;
             }
+            this.Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
